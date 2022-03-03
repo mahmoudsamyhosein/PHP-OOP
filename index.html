@@ -29,11 +29,8 @@
 			<li><a href="#interfaces"> الواجهات </a></li>
 			<li><a href="#namespace"> مجال الأسم</a></li>
 			<li><a href="#traits"> المميزات</a></li>
-
+			<li><a href="#Constants">الثوابت</a></li>
 			<li><a href="#magic_method"> الدوال السحرية</a></li>
-
-			<li><a href="#Autoload_Classes"> Autoload Classes </a></li>
-
 		</ul>
 		<div id="documenter_copyright">
 			<a href="https://github.com/mahmoudsamyhosein">By:MSHM بواسطة محمود سامي حسين متولي</a>
@@ -61,7 +58,7 @@
 				</h2>
 			</div>
 			<hr>
-			<img src="doc/assets/images/oop.png" width="210" height="400" alt="laravel-image-placeholder">
+			<img src="doc/assets/images/q.png"  alt="PHP OOP">
 			<hr>
 			<h1>
 				البرمجة كائنية التوجة او البرمجة بالكائنات أو oop 
@@ -201,11 +198,10 @@
 				</ol>
 			<h4>
 			<hr>
-			<h1 class="text-center"><a id="training_1">حل التمرين رقم (1)</a></h1>
+			<h1 class="text-center"><a href="#training_1">حل التمرين رقم (1)</a></h1>
 		</section>
 		<!-- الأصناف والكائنات  -->
 <!-- ##################################################################################################################### -->
-
 		<!-- معدلات الوصول -->
 <!-- #################################################### -->
 		<section id="Access Modifiers">
@@ -313,9 +309,6 @@
 		</section>
 		<!-- معدلات الوصول   -->
 <!-- ####################################################################################################################### -->
-
-
-
 		<!-- المتغير الزائف-->
 <!-- #################################################### -->
 <section id="sudo_var">
@@ -444,7 +437,6 @@
 </section>
 		<!-- التغليف -->
 <!-- ################################################################################################################### -->
-
 		<!-- الواجهات -->
 <!-- #################################################### -->
 <section id="interfaces">
@@ -574,8 +566,6 @@
 </section>
 		<!-- الواجهات -->
 <!-- ######################################################################################################################### -->
-
-
 		<!-- الوراثة -->
 <!-- #################################################### -->
 <section id="inheritance">
@@ -707,7 +697,7 @@
 	<hr>
 	<h1 class="text-center" > مثال 4 </h1>
 	<p>
-		(PHP - Overriding Inherited Methods) - تجاوز الطرق الموروثة <br>
+		(PHP - Overriding Inherited Methods) - تجاوز الطرق الموروثة 
 		عند أستدعاء طريقة لابد من التصريح عنها في الابن باستخدام نفس اسم الأب 
 	</p>
 	<hr>
@@ -751,7 +741,7 @@
 	</pre>
 	<hr>
 	<div>
-		<h1 class="text-center" > الكلمة المحجوزة final </h1>
+		<h1 class="text-center" > الكلمة المحجوزة (final) </h1>
 		<p>
 			تستخدم لمنع التوريث أو تجاوز الدوال 
 			<P class="text-left">The final keyword can be used to prevent class inheritance or to prevent method overriding<P>
@@ -803,70 +793,393 @@
 		<!-- التجريد -->
 <!-- #################################################### -->
 <section id="abstraction">
+	<h1 class="text-center">
+		التجريد (abstraction)
+	</h1>
+	<hr>
+	<h1 class="text-center">
+		للتصريح عن خاصية أو طريقة مجردة بأستخدام الكلمة المحجوزة 
 
+		<span style="color: brown;">abstract</span>
+	</h1>
+	<p class="text-left">
+		Abstract classes and methods are when the parent class has a named method, but need its child class(es) to fill out the tasks.
+		An abstract class is a class that contains at least one abstract method. An abstract method is a method that is declared, but not implemented in the code.
+		An abstract class or method is defined with the <span style="color: brown;">abstract</span>  keyword
+	</p>
+	<div>
+		<h1 class="text-center">
+			مثال (1)
+		</h1>
+		<pre>
+			&lt;?php
+			// صنف مجرد 
+			abstract class ParentClass {
+				//طرق مجردة  عامة
+			abstract public function someMethod1();
+			abstract public function someMethod2($name, $color);
+			abstract public function someMethod3() : string;
+			}
+			?>
+		</pre>
+		<h1 class="text-center">
+			مثال (2)
+		</h1>
+		<pre>
+			&lt;?php
+			// Parent class صنف أب مجرد
+			abstract class Car {
+				// خاصية
+			public $name;
+				// طريقة بناء 
+			public function __construct($name) {
+				$this->name = $name;
+			}
+			 // طريقة بناء مجردة عامة
+			abstract public function intro() : string;
+			}
+
+			// Child classes أصناف أبناء
+			class Audi extends Car {
+				// طريقة عامة
+			public function intro() : string {
+				return "Choose German quality! I'm an $this->name!";
+			}
+			}
+
+			class Volvo extends Car {
+			public function intro() : string {
+				return "Proud to be Swedish! I'm a $this->name!";
+			}
+			}
+
+			class Citroen extends Car {
+			public function intro() : string {
+				return "French extravagance! I'm a $this->name!";
+			}
+			}
+
+			// Create objects from the child classes
+			$audi = new audi("Audi");
+			echo $audi->intro();
+			echo "&lt;br>";
+
+			$volvo = new volvo("Volvo");
+			echo $volvo->intro();
+			echo "&lt;br>";
+
+			$citroen = new citroen("Citroen");
+			echo $citroen->intro();
+			?>
+		</pre>
+		<h1 class="text-center">
+			مثال (3)
+		</h1>
+		<pre>
+			&lt;?php
+			abstract class ParentClass {
+				// Abstract method with an argument
+				abstract protected function prefixName($name);
+			  }
+			  
+			  class ChildClass extends ParentClass {
+				public function prefixName($name) {
+				  if ($name == "John Doe") {
+					$prefix = "Mr.";
+				  } elseif ($name == "Jane Doe") {
+					$prefix = "Mrs.";
+				  } else {
+					$prefix = "";
+				  }
+				  return "{$prefix} {$name}";
+				}
+			  }
+			  
+			  $class = new ChildClass;
+			  echo $class->prefixName("John Doe");
+			  echo "&lt;br>";
+			  echo $class->prefixName("Jane Doe");
+			?>
+		</pre>
+		<h1 class="text-center">
+			مثال (4)
+		</h1>
+		<pre>
+			&lt;?php
+			abstract class ParentClass {
+			// Abstract method with an argument
+			abstract protected function prefixName($name);
+			}
+
+			class ChildClass extends ParentClass {
+			// The child class may define optional arguments that are not in the parent's abstract method
+			public function prefixName($name, $separator = ".", $greet = "Dear") {
+				if ($name == "John Doe") {
+				$prefix = "Mr";
+				} elseif ($name == "Jane Doe") {
+				$prefix = "Mrs";
+				} else {
+				$prefix = "";
+				}
+				return "{$greet} {$prefix}{$separator} {$name}";
+			}
+			}
+
+			$class = new ChildClass;
+			echo $class->prefixName("John Doe");
+			echo "&lt;br>";
+			echo $class->prefixName("Jane Doe");
+			?>
+		</pre>
+	
+	</div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<!-- التجريد -->
 <!-- ######################################################################################################################### -->
-		<!-- التجريد -->
+		<!-- مجالات الأسماء -->
 <!-- #################################################### -->
 <section id="namespace">
+	<h1 class="text-center">
+		مجالات الأسماء (namespaces)
+	</h1>
+	<hr>
+	<img src="doc/assets/images/space-13.jpg" alt="space-image-for-namespaces">
+	<h1>
+		تم أنشاء مجالات الأسماء لحل مشكلتين هما كالتالي <br>
+		<hr>
+		1-تنظيم الكود بطريقة أفضل وذلك من خلال جعل الاصناف مقسمة في مجموعة لتؤدي وظيفة معينة<br>
+		<hr>
+		2- أستخدام أسم الصنف في أكثر من صنف <br>
+		<hr>
+		ويتم ذلك عبر  أستخدام الكلمة المحجوزة<span style="color: brown;"> namespace </span>
+		<hr>
+		ملاحظة :  يسمح مجال الاسم بعدم وجود تعارض بين أسماء الأصناف لان لكل صنف مجاله الخاص 
+	</h1>
+	<hr>
+	<h1 class="text-left">
+		: Namespaces are qualifiers that solve two different problems
+		<hr>
+		They allow for better organization by grouping classes that work together to perform a task
+		<hr>
+		They allow the same name to be used for more than one class
+		<hr>
+		For example, you may have a set of classes which describe an HTML table
+		, such as Table, Row and Cell while also having another set of classes to describe furniture,
+		such as Table, Chair and Bed. Namespaces can be used to organize the classes into two different groups while also preventing the two classes Table and Table from being mixed up.
+		Declaring a Namespace
+		<hr>
+		Namespaces are declared at the beginning of a file using the <span style="color: brown;"> namespace </span>keyword
+		<hr>
+	</h1>
+	<hr>
+	<div>
+		<h1 class="text-center">
+			للتصريح عن مجال اسم 
+		</h1>
+		<pre>
+			namespace Html;
+		</pre>
+		<h1 class="text-center">
+			ملاحظة يجب أن يكون التصريح عن مجال الاسم في بداية الملف والا سوف يحدث خطأ 
+		</h1>
+		<pre>
+			&lt;?php
+			//خطأ نحوي syntax error 
+			// يجب ان يتم التصريح عن مجالات الاسماء في بداية الملف 
+			echo "Hello World!";
+			// التصريح عن مجال الاسم باستخدام الكلمة المحجوزة namespace
+			namespace Html;
+			...
+			?>
+		</pre>	
+		<h1 class="text-center"> مثال (1) </h1>
+		<pre>
+			&lt;?php
+			//مجال أسم html
+			namespace Html;
+			//صنف جدول
+			class Table {
+				// خواص الصنف
+			public $title = "";
+			public $numRows = 0;
+			// طريقة الصنف
+			public function message() {
+				echo "&lt;p>Table '{$this->title}' has {$this->numRows} rows.&lt;/p>";
+			}
+			}
+			// التصريح عن كائن جديد
+			$table = new Table();
+			$table->title = "My table";
+			$table->numRows = 5;
+			?>
+			&lt;!DOCTYPE html>
+			&lt;html>
+			&lt;body>
+			&lt;?php
+			$table->message();
+			?>
+			&lt;/body>
+			&lt;/html>
+		</pre>
+		<h1 class="text-center">
+			لمزيد من التنظيم ، من الممكن أن يكون لديك مساحات أسماء متداخلة  nested namespaces<br><hr>
+			(النحو Syntax )<br><hr>
+			التصريح عن مجال اسم html <br><hr>
+			داخل مجال أسم أخر أسمه code<br><hr>
+			: Declare a namespace called Html inside a namespace called Code<br><hr>
 
+		</h1>
+		<pre>
+			namespace Code\Html;			
+		</pre>
+
+		<h1 class="text-center"> أستخدام مجالات الأسماء </h1>
+		<p>
+			لاستخدام مجالات الأسماء خارجها يجب التصريح عن أسم الصنف الذي بداخل المجال مرتبطا باسم المجال كالتالي
+		</p>
+		<pre>
+			$table = new Html\Table()
+			$row = new Html\Row();
+		</pre>
+		<h1 class="text-center">
+			الأن اذا كنت سوف تستخدم العديد من الاصناف الموجوده في مجال ما فان افضل طريقة لأستخدامها كالتالي
+		</h1>
+		<pre>
+			namespace Html;
+			$table = new Table();
+			$row = new Row();
+		</pre>
+		<h1 class="text-center">
+			الأن هناك طريقة أفضل تمكنك من تغيير مجالات الأسماء كما تريد من خلال أستخدام الكلمة المحجوزة use<br> 
+			وأعطاءها ما يسمي alias
+		</h1>
+		<pre>
+			//أعطاء اسم alias لمجال الاسم
+			use Html as H;
+			$table = new H\Table();
+		</pre>
+		<pre>
+			//أعطاء أسم alias لصنف ما 
+			use Html\Table as T;
+			$table = new T();
+		</pre>
+	</div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<!-- التجريد -->
+		<!-- مجالات الأسماء -->
 <!-- ######################################################################################################################### -->
 		<!-- المميزات -->
 <!-- #################################################### -->
 <section id="traits">
-	<div>
-		<h1 class="text-center">
+	<h1 class="text-center">
+		المميزات (traits) 
 
+	</h1>
+	
+	<div>
+
+		<h1 class="text-center">
+			 لغة PHP هي لغة أحادية الوراثة بمعني انه لا تتم الوراثة سوي من أب وحيد فقط <br>
+			 لذلك تم حل هذه المشكلة باستخدام الكلمة المحجوزة <span style="color: brown;"> trait </span>
+			 بمعني انه الميزة تمكنني من أستخدمها في العديد من الاصناف classes<br>
+			 <br>
+			 <br> والكلمة المحجوزة<span style="color:brown;"> use </span> للاستخدام داخل الاصناف
+			 <hr>
+		</h1>
+		<h1 class="text-left">
+			PHP only supports single inheritance: a child class can inherit only from one single parent
+			So, what if a class needs to inherit multiple behaviors? OOP traits solve this problem
+			Traits are used to declare methods that can be used in multiple classes
+			Traits can have methods and abstract methods that can be used in multiple classes
+			and the methods can have any access modifier (public, private, or protected)
+			Traits are declared with the <span style="color: brown;"> trait </span>  keyword
 		</h1>
 		<hr>
-		<pre>
-	
-		</pre>
+		<div>
+			<h1 class="text-center">طريقة التصريح (النحو syntax)</h1>
+			<hr>
+			<pre>
+			&lt;?php
+			//النحو
+			trait TraitName {
+			// some code...
+			}
+			?>
+			</pre>
+			<pre>
+			&lt;?php
+			//النحو للصنف
+			class MyClass {
+				// الاستخدام داخل الصنف 
+			use TraitName;
+			}
+			?>
+			</pre>
+		</div>
+		<div>
+			<h1 class="text-center">مثال (1)</h1>
+			<pre>
+					&lt;?php
+					//الميزة trait
+					trait message1 {
+						//طريقة داخل الميزة
+					public function msg1() {
+						// طباعة فقط
+						echo "OOP is fun! ";
+					}
+					}
+					// صنف باسم welcome
+					class Welcome {
+					//أستخدام الميزة الأولي ياستخدام الكلمة use
+					use message1;
+					}
+					//انشاء كائن جديد
+					$obj = new Welcome();
+					//أستدعاء الطريقة method  
+					$obj->msg1();
+					?>
+			</pre>
+			<hr>
+			<h1 class="text-center">مثال (2)</h1>
+			<pre>
+					&lt;?php
+					//الميزة بالاسم massage 1
+					trait message1 {
+						//الطريقة method 
+						public function msg1() {
+						  echo "OOP is fun! ";
+						}
+					  }
+					  // الميزة massage 2
+					  trait message2 {
+						//الطريقة method 
+						public function msg2() {
+						  echo "OOP reduces code duplication!";
+						}
+					  }
+					  // صنف اسمة welcome 
+					  class Welcome {
+						// أستخدام الميزه باستخدام الكلمة use
+						use message1;
+					  }
+					  // صنف اسمة welcome2
+					  class Welcome2 {
+						// أستخدام الميزه باستخدام الكلمة use
+						use message1, message2;
+						// يستخدم الميزتين الاولي والثانية 
+					  }
+					  //كائن جديد 
+					  $obj = new Welcome();
+					  //استخدام method الميزة الاولي
+					  $obj->msg1();
+					  ##################################################
+					  $obj2 = new Welcome2();
+					  //استخدام method الميزة الاولي والثانية
+					  $obj2->msg1();
+					  $obj2->msg2();
+					  ?>
+			</pre>
+		</div>
+		
 	</div>
 </section>
 		<!-- المميزات -->
@@ -874,58 +1187,285 @@
 		<!-- الدوال السحرية -->
 <!-- #################################################### -->
 <section id="magic_method">
+	<h1 class="text-center">
+		الدوال السحرية (Magic Method)
+	</h1>
+	<img src="doc/assets/images/magician.jpg" alt="magician_image_magic_methods">
+	<hr>
+	<h1 class="text-center">
+		دالة البناء (Constructor)
+	</h1>	
+	<hr>
+		<p class="lead">
+			تسمح بتهيئة الكائن أثناء أنشاءة<br>
+			ووظيفتها الفعلية هي تقليل حجم الكود الازم عند استدعاء الكائن وانشاءة
+			أذا قمت بانشاء دالة بناء <span style="color:brown;">
+				__construct()
+			</span>
+			سوف تقوم اللغة تلقائيا باستدعاء هذه الطريقة أو الدالة عند أنشاءها  عند بداية الاسكربت
+			تبدا دالة البناء بعلامتي فاصلة تحت الخط أو 2 underscore
+		</p>
 
+		<p class="text-left lead">
+			A constructor allows you to initialize an object's properties upon creation of the object.
+			If you create a <span style="color: brown;"> __construct() </span>  function, PHP will automatically call this function when you create an object from a class.
+			Notice that the construct function starts with two underscores <span style="color: brown;">(__)</span>
+			We see in the example below, that using a constructor saves us from calling the <span style="color: brown;">set_name()</span> method which reduces the amount of code
+		</p>
+	<hr>
+	<h1 class="text-center">
+		مثال (1)
+	</h1>
+	<pre>
+		&lt;?php
+		//صنف Fruit
+		class Fruit {
+			// خواص الصنف
+		public $name;
+		public $color;
+			// دالة البناء تحتوي علي معامل أو parameter وحيد
+		function __construct($name) {
+			$this->name = $name;
+		}
+		// طريقة أخري 
+		function get_name() {
+			return $this->name;
+		}
+		}
+		// أنشاء الكائن وتمرير المعامل parameter
+		$apple = new Fruit("Apple");
+		// طباعه الطريقة الأخري
+		echo $apple->get_name();
+		?>
+	</pre>
+	<hr>
+	<h1 class="text-center">
+		مثال (2)
+	</h1>
+	<pre>
+		&lt;?php
+		// صنف بالاسم Fruit
+		class Fruit {
+			// الخواص
+		public $name;
+		public $color;
+		// دالة البناء تحتوي علي معامل أو parameter وحيد
+		function __construct($name, $color) {
+			$this->name = $name;
+			$this->color = $color;
+		}
+		// طريقة أخري 
+		function get_name() {
+			return $this->name;
+		}
+		// طريقة أخري 
+		function get_color() {
+			return $this->color;
+		}
+		}
+		// أنشاء الكائن وتمرير المعاملات parameter
+		$apple = new Fruit("Apple", "red");
+		echo $apple->get_name();
+		echo "&lt;br>";
+		echo $apple->get_color();
+		?>
+	</pre>
+	<h1 class="text-center">
+		دالة الهدم (Destructor)
+	</h1>	
+	<hr>
+		<p class="lead">
+			تسمح بتدمير الكائن بعد أنشاءة<br>
+			ووظيفتها الفعلية هي تقليل حجم الكود الازم عند تدمير الكائن 
+			يتم استخدامها في حالة الخروج من الاسكربت مثلا أو ايقاف تنفيذ شيء ما
+			أذا قمت بانشاء دالة هدم <span style="color:brown;">
+				__destruct()
+			</span>
+			 سوف تقوم اللغة تلقائيا باستدعاء هذه الطريقة أو الدالة عند أنشاءها عند نهاية الاسكربت
+			تبدا دالة الهدم بعلامتي فاصلة تحت الخط أو 2 underscore
+		</p>
+
+		<p class="text-left lead">
+			A destructor is called when the object is destructed or the script is stopped or exited.
+			If you create a <span style="color:brown;">__destruct()</span>  function, PHP will automatically call this function at the end of the script.
+			Notice that the destruct function starts with two underscores <span style="color:brown;">(__)</span>
+			The example below has a <span style="color:brown;">__construct() </span>function that is automatically called when you create an object from a class,
+			and a <span style="color:brown;">__destruct()</span> function that is automatically called at the end of the script
+		</p>
+	<hr>
+	<h1 class="text-center">
+		مثال (1)
+	</h1>
+	<pre>
+		&lt;?php
+		// Fruit  أنشاء صنف بأسم
+		class Fruit {
+			//الخواص
+		public $name;
+		public $color;
+			// دالة البناء 
+		function __construct($name) {
+			$this->name = $name;
+		}
+		   // دالة الهدم 
+		function __destruct() {
+			echo "The fruit is {$this->name}.";
+		}
+		}
+		// أنشاء كائن جديد
+		$apple = new Fruit("Apple");
+		?>
+	</pre>
+	<hr>
+	<h1 class="text-center">
+		مثال (2)
+	</h1>
+	<pre>
+		&lt;?php
+		// Fruit  أنشاء صنف بأسم
+		class Fruit {
+			//الخواص
+			public $name;
+			public $color;
+			// دالة البناء 
+			function __construct($name, $color) {
+			  $this->name = $name;
+			  $this->color = $color;
+			}
+			// دالة الهدم 
+			function __destruct() {
+			  echo "The fruit is {$this->name} and the color is {$this->color}.";
+			}
+		  }
+		  // أنشاء كائن جديد
+		  $apple = new Fruit("Apple", "red");
+		?>
+	</pre>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<!-- الدوال السحرية -->
 <!-- ######################################################################################################################### -->
-		<!-- Autoload Classes -->
+<!-- الثوابت -->
 <!-- #################################################### -->
-<section id="Autoload_Classes">
-
+<section id="Constants">
+	<h1 class="text-center">
+		(constants) الثوابت 
+	</h1>
+	<P class="lead">
+		الثابت بمجرد التصريح عنه لا يمكن ان يتغيير والا يحدث خطأ بعكس المتغيرات <br>
+		يمكن أستخدام الثوابت اذا كان لديك بعض البيانات التي تريدها ان تكون ثابته ولا تتغير<br>
+		أذا أردت أن أصرح عن ثابت سوف أستخدم الكلمة <span style="color: brown;"> const </span><br>
+		الثوابت حساسة لحالة الأحرف كالمتغيرات ولكن ينصح بأن يكون أسم المتغير بأحرف  كبيرة <br>
+		مثال :<br>
+		<pre>
+			&lt;?php
+			const HOMEPAGE="IAM A TEXT THAT SHOWS IN THE HOME PAGE ";
+		</pre>
+	</P>
+	<h1 class="lead">
+		يمكن الوصول الي الثوابت من خارج الصنف باستخدام النقتطين <br>
+		<span style="color: brown;">::</span><br>مايعرف باسم  scope resolution operator
+	</h1>
+	<div>
+		<h1 class="text-center">مثال (1)</h1>
+		<pre>
+			&lt;?php
+			//الصنف باسم Goodbye 
+			class Goodbye {
+				//ثابت أسمة LEAVING_MESSAGE يحتوي علي رسالة ما للزائر
+			const LEAVING_MESSAGE = "شكرا لك علي زيارتك لموقعنا !";
+			}
+			//طباعة الرسالة
+			echo Goodbye::LEAVING_MESSAGE;
+			//الأن انا وصلت الي الثابت من خلال اولا كتابه اسم الصنف ثم استخدام ال scope وبعد ذلك أسم الثابت
+			?>
+		</pre>
+		<h1 class="text-center">مثال (2)</h1>
+		<p class="lead"> يمكن الوصول الي الثابت داخل الصنف باستخدام الكلمة المحجوزة <span style="color: brown;">
+			self
+		</span></p>
+		<pre>
+			&lt;?php
+			//الصنف باسم Goodbye 
+			class Goodbye {
+				//ثابت أسمة LEAVING_MESSAGE يحتوي علي رسالة ما للزائر
+			const LEAVING_MESSAGE = "شكرا لك علي زيارتك لموقعنا !";
+			 // طريقة عامة توضح أستخدام الثابت
+			public function byebye() {
+				// استخدام الثابت من خلال ال scope و كلمة self
+				echo self::LEAVING_MESSAGE;
+			}
+			}
+			//أنشاء كائن جديد
+			$goodbye = new Goodbye();
+			//أستخدام الطريقة 
+			$goodbye->byebye();
+			?>
+		</pre>
+	</div>
 </section>
+<!-- الثوابت -->
+<!-- ######################################################################################################################### -->
+		<!-- التمارين -->
+<!-- #################################################### -->
+<section id="ASSESSMENT">
+	<div id="training_1">
+		<h1 class="text-center">حل التمرين الأول</h1>
+		<pre>
+			&lt;?php
+			//صنف أسمة appledevice
+			class appledevice{
+				// الخواص التالية  [ram-color-brand-Operating_system]
+				public $ram;
+				public $color;
+				public $brand;
+				public $Operating_system;
 
+			}
+			//أنشاء كائن جديد من الصنف appledevice
+			$iphone_6 = new appledevice();
+			$iphone_6->ram = "2 جيجا بايت";
+			$iphone_6->color = "أحمر";
+			$iphone_6->brand = "ابل";
+			$iphone_6->Operating_system = "IOS";
 
+			//أنشاء كائن جديد من الصنف appledevice
+			$iphone_7 = new appledevice();
+			$iphone_7->ram = "3 جيجا بايت";
+			$iphone_7->color = "أبيض";
+			$iphone_7->brand = "ابل";
+			$iphone_7->Operating_system = "IOS";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<!-- Autoload Classes -->
+			//الطباعة بأستخدام var_dump
+			echo "&lt;pre>";
+			var_dump($iphone_6,$iphone_7);
+			echo "&lt;pre>";
+		</pre>
+		<p class="text-center"> خرج طباعة المثال </p>
+		<pre>
+			object(appledevice)#1 (4) {
+				["ram"]=>
+				string(19) "2 جيجا بايت"
+				["color"]=>
+				string(8) "أحمر"
+				["brand"]=>
+				string(6) "ابل"
+				["Operating_system"]=>
+				string(3) "IOS"
+			  }
+			  object(appledevice)#2 (4) {
+				["ram"]=>
+				string(19) "3 جيجا بايت"
+				["color"]=>
+				string(8) "أبيض"
+				["brand"]=>
+				string(6) "ابل"
+				["Operating_system"]=>
+				string(3) "IOS"
+			  }
+		</pre>
+	</div>
+</section>
+		<!-- التمارين -->
 <!-- ######################################################################################################################### -->
 		<!-- جافا سكربت -->
 <!-- #################################################### -->
